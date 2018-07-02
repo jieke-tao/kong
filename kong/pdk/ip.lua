@@ -1,5 +1,25 @@
+---
+-- Trusted IPs module
+--
+-- This module allows querying whether an IP is trusted or not for X-Forwarded-* headers.
+-- It depends on the `trusted_ips` option in the Kong config file
+-- @module kong.ip
 local ip = require "resty.mediador.ip"
 
+---
+-- Depending on the `trusted_ips` option on the Kong config file,
+-- this function will return whether a given ip is trusted or not
+--
+-- Both ipv4 and ipv6 are supported.
+--
+-- @function kong.ip.is_trusted
+-- @phases
+-- @tparam string address A string representing an IP address
+-- @treturn boolean `true` if the IP is trusted, `false` otherwise
+-- @usage
+-- if kong.ip.is_trusted("1.1.1.1") then
+--   kong.log("The IP is trusted")
+-- end
 
 local function new(self)
   local _IP = {}
